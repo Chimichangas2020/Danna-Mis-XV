@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis XV Años</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #f8e1f4, #ffffff);
+    color: #333;
+    text-align: center;
+    scroll-behavior: smooth;
+}
+
+section {
+    padding: 60px 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+}
+
+.hero {
+    background: url('https://images.unsplash.com/photo-1529634806980-6a8e7fbb7a5f') center/cover no-repeat;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-attachment: fixed;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.details {
+    background: #fff;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 20px;
+    background: #d46abf;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: #a84c98;
+    transform: scale(1.05);
+}
+
+footer {
+    background: #f8e1f4;
+    padding: 30px;
+    font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.2em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <h1>Dana</h1>
+    <p>Te invita a celebrar sus XV Años</p>
+</section>
+
+<section>
+    <h2>Con la bendición de Dios y mis padres</h2>
+    <p>Erick Escatel<br>Teresa Aceves</p>
+</section>
+
+<section class="details">
+    <h2>Fecha</h2>
+    <p>15 de Agosto 2026</p>
+
+    <h2>Recepción</h2>
+    <p>Salón Eleganza<br>
+    6:00 PM</p>
+
+    <a class="button" href="https://wa.me/521XXXXXXXXXX" target="_blank">
+        Confirmar Asistencia
+    </a>
+</section>
+
+<section>
+    <h2>Código de Vestimenta</h2>
+    <p>Formal / Elegante</p>
+</section>
+
+<footer>
+    ¡Será un honor contar con tu presencia!
+</footer>
+
+<script>
+const sections = document.querySelectorAll("section");
+
+const reveal = () => {
+    sections.forEach(section => {
+        const windowHeight = window.innerHeight;
+        const elementTop = section.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+            section.classList.add("visible");
+        }
+    });
+};
+
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+</script>
+
+</body>
+</html>
