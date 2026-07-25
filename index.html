@@ -472,27 +472,29 @@
         }, 5000);
 
         //****************************************************************
-        //
-        // Activar reproducción automática al primer clic o toque en la página
+        //MK ►
+       // Activar reproducción automática al interactuar o hacer scroll por primera vez
         function iniciarAutoplay() {
             const music = document.getElementById('bgMusic');
             const playBtn = document.getElementById('playBtn');
-
-            // Intentar reproducir
+        
+            // Intentar reproducir el audio
             music.play().then(() => {
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }).catch(error => {
-                console.log("El navegador bloqueó el inicio automático directo:", error);
+                console.log("El navegador requiere interacción previa:", error);
             });
-
-            // Remover el evento después de la primera interacción
-            document.removeEventListener('click', iniciarAutoplay);
+        
+            // Remover todos los escuchadores para que no se vuelva a ejecutar
+            document.removeEventListener('scroll', iniciarAutoplay);
             document.removeEventListener('touchstart', iniciarAutoplay);
+            document.removeEventListener('click', iniciarAutoplay);
         }
-
-        // Escuchar la primera interacción del invitado
-        document.addEventListener('click', iniciarAutoplay);
-        document.addEventListener('touchstart', iniciarAutoplay);    
+        
+        // Escuchar el primer movimiento de desplazamiento, toque o clic
+        document.addEventListener('scroll', iniciarAutoplay, { passive: true });
+        document.addEventListener('touchstart', iniciarAutoplay, { passive: true });
+        document.addEventListener('click', iniciarAutoplay, { passive: true });  
         //****************************************************************
         
     </script>
