@@ -7,7 +7,8 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
     <!-- FontAwesome para Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -83,8 +84,10 @@
         }
 
         .overlay h1 {
-            font-family: 'Alex Brush', cursive;
-            font-size: 4rem;
+            font-family: 'Great Vibes', cursive; /* ...:::MK:::... */
+            font-size: 3.5rem;                   /* ...:::MK:::... */
+            /*font-family: 'Alex Brush', cursive;
+            font-size: 4rem;*/
             color: var(--texto-oscuro);
             margin: 10px 0;
         }
@@ -219,6 +222,50 @@
             pointer-events: none;
         }
 
+        /* TEXTURA PARA RECUADROS
+        .card, .overlay-card {
+            background-color: #fdfdfd;
+            background-image: 
+                linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+                linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }*/
+
+        /* TEXTURA PARA RECUADROS
+        .card, .overlay-card {
+            background-color: #fdfdfd;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.25) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }*/
+
+        /*.card, .overlay-card {
+            background-color: #fdfdfd;
+            background-image: 
+                linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+                linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }*/
+
+        /*TEXTURA PUNTOS DORADOS
+        .card, .overlay-card {
+            background-color: #fafafa;
+            background-image: 
+                radial-gradient(rgba(212, 175, 55, 0.4) 1.5px, transparent 1.5px), 
+                radial-gradient(rgba(212, 175, 55, 0.4) 1.5px, #ffffff 1.5px);
+            background-size: 14px 14px;
+            background-position: 0 0, 7px 7px;
+        }*/
+
+        /*TEXTURA CUADROS*/
+        .card, .overlay-card {
+            background-color: #fdfdfd;
+            background-image: 
+                linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+                linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+
+
         h2 {
             font-family: 'Playfair Display', serif;
             color: var(--dorado);
@@ -240,6 +287,27 @@
             line-height: 1.8;
             font-size: 1rem;
             color: var(--texto-oscuro);
+        }
+
+        /* CONTADOR REGRESIVO */
+        .time-box {
+            background: var(--rosa-pastel);
+            border: 1px solid var(--dorado);
+            border-radius: 10px;
+            padding: 10px;
+            min-width: 65px;
+        }
+        .time-box span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dorado);
+            display: block;
+        }
+        .time-box p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin: 0;
         }
 
         .family-grid {
@@ -371,14 +439,6 @@
             margin: 0 auto;
         }
 
-        /* Estilos de la ventana de Padlet / Libro de visitas */
-        .padlet-embed {
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--rosa-medio);
-            margin-top: 20px;
-        }
-
         footer {
             background: var(--texto-oscuro);
             color: var(--blanco);
@@ -392,40 +452,12 @@
             .carousel-slide img { height: 300px; }
             .card { padding: 30px 15px; }
         }
-
-        /* ------------------------------------
-           TEXTURA PARA RECUADROS BLANCOS
-        ------------------------------------ */
-        .card, .overlay-card {
-            background-color: #fdfdfd;
-            background-image: 
-                linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px),
-                linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
-            background-size: 8px 8px;
-        }
-
-        .time-box {
-            background: var(--rosa-pastel);
-            border: 1px solid var(--dorado);
-            border-radius: 10px;
-            padding: 10px;
-            min-width: 65px;
-        }
-        .time-box span {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--dorado);
-            display: block;
-        }
-        .time-box p {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            margin: 0;
-}
     </style>
 </head>
 <body>
+
+    <!-- Lienzo para el efecto de polvo de estrellas -->
+    <canvas id="stardustCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;"></canvas>
 
     <!-- PANTALLA DE BIENVENIDA (OVERLAY) -->
     <div id="overlay" class="overlay">
@@ -458,18 +490,23 @@
         <p>15 DE OCTUBRE DEL 2026</p>
     </header>
 
-    <!-- Contador Regresivo -->
-    <section class="card" style="padding: 25px 15px;">
-        <h3 style="font-family: 'Playfair Display', serif; color: var(--dorado); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px;">Faltan</h3>
-        <div id="countdown" style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-            <div class="time-box"><span id="days">00</span><p>Días</p></div>
-            <div class="time-box"><span id="hours">00</span><p>Horas</p></div>
-            <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
-            <div class="time-box"><span id="seconds">00</span><p>Seg</p></div>
-        </div>
-    </section>
-
     <div class="container">
+
+        <!-- Contador Regresivo -->
+        <section class="card" style="padding: 25px 15px;">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--dorado); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px;">Faltan</h3>
+            <div id="countdown" style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+                <div class="time-box"><span id="days">00</span><p>Días</p></div>
+                <div class="time-box"><span id="hours">00</span><p>Horas</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>Seg</p></div>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Años+Danna+Itzel&dates=20261015T190000/20261016T020000&details=Celebración+de+los+XV+Años+de+Danna+Itzel&location=Parroquia+Señor+de+la+Ascención" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--dorado); color: var(--texto-oscuro); font-size: 0.85rem;">
+                    <i class="far fa-calendar-plus"></i> Agendar en mi Calendario
+                </a>
+            </div>
+        </section>
 
         <!-- Mensaje de Bienvenida / Padres y Padrinos -->
         <section class="card">
@@ -547,8 +584,7 @@
             <p>Te agradecemos vestir la etiqueta adecuada para acompañarnos en esta noche dorada e inolvidable.</p>
         </section>
 
-
-        <!-- LIBRO DE VISITAS VIRTUAL INTEGRADO & MENSAJES DE AUDIO -->
+        <!-- LIBRO DE VISITAS VIRTUAL INTEGRADO CON NUBE (JSONBin) -->
         <section class="card">
             <div style="font-size: 3rem; color: var(--dorado); margin-bottom: 10px;">
                 <i class="fas fa-book-open"></i>
@@ -565,19 +601,15 @@
                 <textarea id="textoFelicitacion" rows="3" placeholder="Escribe tus buenos deseos aquí..." style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--dorado); font-family: 'Montserrat', sans-serif; margin-bottom: 15px; outline: none; resize: vertical;"></textarea>
                 
                 <div style="text-align: center;">
-                    <button onclick="publicarMensaje()" class="btn" style="padding: 12px 25px; font-size: 0.95rem;">
+                    <button id="btnPublicar" onclick="publicarMensaje()" class="btn" style="padding: 12px 25px; font-size: 0.95rem;">
                         <i class="fas fa-paper-plane"></i> Publicar Felicitación
                     </button>
                 </div>
             </div>
 
-            <!-- Contenedor donde se muestran los mensajes en vivo -->
+            <!-- Contenedor de mensajes recibidos -->
             <div id="listaMensajes" style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px; max-height: 350px; overflow-y: auto; padding-right: 5px;">
-                <!-- Mensajes de ejemplo iniciales -->
-                <div class="mensaje-item" style="background: #ffffff; border-left: 4px solid var(--dorado); padding: 15px; border-radius: 8px; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                    <strong style="color: var(--dorado); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 4px;">Tía Teresa Aceves</strong>
-                    <p style="font-size: 0.9rem; color: var(--texto-oscuro); margin: 0; line-height: 1.5;">¡Muchas felicidades mi niña hermosa! Que Dios te bendiga siempre en esta nueva etapa.</p>
-                </div>
+                <p style="font-size: 0.85rem; color: var(--texto-oscuro);">Cargando felicitaciones...</p>
             </div>
 
             <!-- Opción: Mensaje de Audio -->
@@ -585,13 +617,11 @@
                 <p><strong>¿Prefieres decírselo con tu voz? 🎙️</strong></p>
                 <p style="font-size: 0.9rem; margin-top: 5px;">¡Envía una nota de audio con tus felicitaciones!</p>
                 
-                <!-- Reemplaza el número por tu número de WhatsApp -->
-                <a href="https://wa.me/521XXXXXXXXXX?text=¡Hola%20Danna!%20Te%20envío%20este%20mensaje%20de%20audio%20de%20felicitación..." target="_blank" class="btn btn-audio">
+                <a href="https://wa.me/523311557703?text=¡Hola%20Danna!%20Te%20envío%20este%20mensaje%20de%20audio%20de%20felicitación..." target="_blank" class="btn btn-audio">
                     <i class="fas fa-microphone"></i> Enviar Audio por WhatsApp
                 </a>
             </div>
         </section>
-        
 
         <!-- Mesa de Regalos / Cofre -->
         <section class="card">
@@ -610,16 +640,10 @@
             <h2>Confirmación</h2>
             <p>Por favor confirma tu asistencia para esperarte con mucha alegría.</p>
             <br>
-            <a href="https://wa.me/?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20Años%20de%20Danna%20Itzel" target="_blank" class="btn btn-whatsapp">
+            <a href="https://wa.me/523311557703?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20Años%20de%20Danna%20Itzel" target="_blank" class="btn btn-whatsapp">
                 <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
             </a>
         </section>
-
-        <div style="margin-top: 15px;">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+Años+Danna+Itzel&dates=20261015T190000/20261016T020000&details=Celebración+de+los+XV+Años+de+Danna+Itzel&location=Parroquia+Señor+de+la+Ascención" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--dorado); color: var(--texto-oscuro); font-size: 0.85rem;">
-            <i class="far fa-calendar-plus"></i> Agendar en mi Calendario
-        </a>
-</div>
 
     </div>
 
@@ -629,18 +653,17 @@
 
     <!-- Scripts JavaScript -->
     <script>
+        // --- 1. REPRODUCTOR Y OVERLAY ---
         const music = document.getElementById('bgMusic');
         const playBtn = document.getElementById('playBtn');
 
         function comenzarInvitacion() {
             const overlay = document.getElementById('overlay');
-
             if (music) {
                 music.play().then(() => {
                     if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 }).catch(err => console.log("Audio esperando interacción:", err));
             }
-
             if (overlay) {
                 overlay.classList.add('oculto');
             }
@@ -656,92 +679,22 @@
             }
         }
 
+        // --- 2. CARRUSEL DE FOTOS ---
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide img');
         const carouselSlide = document.getElementById('carouselSlide');
 
         function moveSlide(direction) {
             currentSlide += direction;
-            if (currentSlide >= slides.length) {
-                currentSlide = 0;
-            }
-            if (currentSlide < 0) {
-                currentSlide = slides.length - 1;
-            }
+            if (currentSlide >= slides.length) { currentSlide = 0; }
+            if (currentSlide < 0) { currentSlide = slides.length - 1; }
             carouselSlide.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        setInterval(() => {
-            moveSlide(1);
-        }, 5000);
+        setInterval(() => { moveSlide(1); }, 5000);
 
-        // Cargar mensajes guardados al abrir la página
-document.addEventListener('DOMContentLoaded', function() {
-    cargarMensajesGuardados();
-});
-
-        function publicarMensaje() {
-            const nombreInput = document.getElementById('nombreInvitado');
-            const textoInput = document.getElementById('textoFelicitacion');
-
-            const nombre = nombreInput.value.trim();
-            const texto = textoInput.value.trim();
-
-            if (nombre === "" || texto === "") {
-                alert("Por favor escribe tu nombre y tu mensaje antes de publicar.");
-                return;
-            }
-
-            const nuevoMensaje = {
-                nombre: nombre,
-                texto: texto,
-                fecha: new Date().toLocaleDateString()
-            };
-
-            // Obtener mensajes anteriores o inicializar arreglo
-            let mensajes = JSON.parse(localStorage.getItem('libroVisitasXV')) || [];
-            mensajes.unshift(nuevoMensaje); // Agregar al inicio de la lista
-            localStorage.setItem('libroVisitasXV', JSON.stringify(mensajes));
-
-            // Limpiar campos de texto
-            nombreInput.value = "";
-            textoInput.value = "";
-
-            // Actualizar vista de la lista
-            cargarMensajesGuardados();
-        }
-
-        function cargarMensajesGuardados() {
-            const listaContainer = document.getElementById('listaMensajes');
-            let mensajes = JSON.parse(localStorage.getItem('libroVisitasXV')) || [];
-
-            // Si hay mensajes guardados, los mostramos
-            if (mensajes.length > 0) {
-                let htmlContent = "";
-                mensajes.forEach(msg => {
-                    htmlContent += `
-                        <div class="mensaje-item" style="background: #ffffff; border-left: 4px solid var(--dorado); padding: 15px; border-radius: 8px; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                            <strong style="color: var(--dorado); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 4px;">${escapeHtml(msg.nombre)}</strong>
-                            <p style="font-size: 0.9rem; color: var(--texto-oscuro); margin: 0; line-height: 1.5;">${escapeHtml(msg.texto)}</p>
-                        </div>
-                    `;
-                });
-                listaContainer.innerHTML = htmlContent;
-            }
-        }
-
-        // Función auxiliar de seguridad
-        function escapeHtml(text) {
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
+        // --- 3. CONTADOR REGRESIVO ---
         const eventDate = new Date("October 15, 2026 19:00:00").getTime();
-
         setInterval(function() {
             const now = new Date().getTime();
             const distance = eventDate - now;
@@ -753,6 +706,180 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
             }
         }, 1000);
+
+        // --- 4. BASE DE DATOS EN LA NUBE (LIBRO DE VISITAS) ---
+        const BIN_ID = '6a6b8ec9f5f4af5e29d6d565';         // Pega tu Bin ID aquí
+        const MASTER_KEY = '$2a$10$idqqWfkyWYcLvhiA2OFIH.MXH6zGYCb4BD53OQ/EzTOJdOm5YyKvO'; // Pega tu Master Key aquí
+
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            obtenerMensajesServidor();
+        });
+
+        async function obtenerMensajesServidor() {
+            const listaContainer = document.getElementById('listaMensajes');
+            try {
+                const res = await fetch(`${API_URL}/latest`, {
+                    headers: { 'X-Master-Key': MASTER_KEY }
+                });
+                const data = await res.json();
+                const mensajes = data.record || [];
+
+                if (mensajes.length === 0) {
+                    listaContainer.innerHTML = `<p style="font-size: 0.85rem; color: var(--texto-oscuro);">Sé el primero en dejar una felicitación a Danna.</p>`;
+                    return;
+                }
+
+                let htmlContent = "";
+                mensajes.forEach(msg => {
+                    htmlContent += `
+                        <div class="mensaje-item" style="background: #ffffff; border-left: 4px solid var(--dorado); padding: 15px; border-radius: 8px; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                            <strong style="color: var(--dorado); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 4px;">${escapeHtml(msg.nombre)}</strong>
+                            <p style="font-size: 0.9rem; color: var(--texto-oscuro); margin: 0; line-height: 1.5;">${escapeHtml(msg.texto)}</p>
+                        </div>
+                    `;
+                });
+                listaContainer.innerHTML = htmlContent;
+            } catch (err) {
+                console.error("Error al cargar mensajes:", err);
+                listaContainer.innerHTML = `<p style="font-size: 0.85rem; color: red;">No se pudieron cargar los mensajes.</p>`;
+            }
+        }
+
+        async function publicarMensaje() {
+            const nombreInput = document.getElementById('nombreInvitado');
+            const textoInput = document.getElementById('textoFelicitacion');
+            const btnPublicar = document.getElementById('btnPublicar');
+
+            const nombre = nombreInput.value.trim();
+            const texto = textoInput.value.trim();
+
+            if (nombre === "" || texto === "") {
+                alert("Por favor escribe tu nombre y tu mensaje antes de publicar.");
+                return;
+            }
+
+            btnPublicar.disabled = true;
+            btnPublicar.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Publicando...`;
+
+            try {
+                const resGet = await fetch(`${API_URL}/latest`, {
+                    headers: { 'X-Master-Key': MASTER_KEY }
+                });
+                const dataGet = await resGet.json();
+                let mensajes = dataGet.record || [];
+
+                mensajes.unshift({ nombre, texto, fecha: new Date().toISOString() });
+
+                await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': MASTER_KEY
+                    },
+                    body: JSON.stringify(mensajes)
+                });
+
+                nombreInput.value = "";
+                textoInput.value = "";
+
+                await obtenerMensajesServidor();
+
+            } catch (err) {
+                console.error("Error al guardar mensaje:", err);
+                alert("Ocurrió un error al guardar tu mensaje. Inténtalo de nuevo.");
+            } finally {
+                btnPublicar.disabled = false;
+                btnPublicar.innerHTML = `<i class="fas fa-paper-plane"></i> Publicar Felicitación`;
+            }
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // --- EFECTO POLVO DE ESTRELLAS CAYENDO ► START---
+        (function() {
+            const canvas = document.getElementById('stardustCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+
+            function initCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            // Crear partículas con tonos dorados y brillo
+            const particleCount = 45; // Cantidad de partículas (elegante y fluido)
+            const colors = ['#d4af37', '#f3e5ab', '#ffffff', '#f8bbd0'];
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    radius: Math.random() * 2.5 + 0.5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: Math.random() * 0.8 + 0.2, // Velocidad de caída
+                    speedX: Math.random() * 0.4 - 0.2, // Balanceo suave
+                    opacity: Math.random() * 0.8 + 0.2,
+                    pulse: Math.random() * 0.02 + 0.005
+                });
+            }
+
+            function render() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+
+                    p.opacity += p.pulse;
+                    if (p.opacity > 0.9 || p.opacity < 0.2) p.pulse = -p.pulse;
+
+                    if (p.y > height) {
+                        p.y = -10;
+                        p.x = Math.random() * width;
+                    }
+                    if (p.x > width) p.x = 0;
+                    if (p.x < 0) p.x = width;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = p.color;
+
+                    // Dibuja una estrella de 4 puntas
+                    const size = p.radius * 2.5;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -size);
+                    ctx.quadraticCurveTo(0, 0, size, 0);
+                    ctx.quadraticCurveTo(0, 0, 0, size);
+                    ctx.quadraticCurveTo(0, 0, -size, 0);
+                    ctx.quadraticCurveTo(0, 0, 0, -size);
+                    ctx.fill();
+
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(render);
+            }
+
+            window.addEventListener('resize', initCanvas);
+            initCanvas();
+            render();
+        })();
+        // --- EFECTO POLVO DE ESTRELLAS CAYENDO ► END ---
+
     </script>
 </body>
 </html>
